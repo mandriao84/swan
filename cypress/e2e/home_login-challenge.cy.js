@@ -65,6 +65,7 @@ context('home_login-challenge', () => {
         data["form_start"]["otp"]["challenge_id"] = request["variables"]["input"]["loginChallenge"]
         data["form_start"]["otp"]["request_id"] = response["data"]["sendOtp"]["requestId"]
         data["form_start"]["otp"]["phone"] = response["data"]["sendOtp"]["mobilePhoneNumber"]
+        // Je stock toutes la data (que je pense etre) necessaire pour valider une authent via l'OTP (si jamais j'avais acces a l'API de validation d'OTP).  
       })
     })
 
@@ -78,6 +79,9 @@ context('home_login-challenge', () => {
       expect(request["fields[subscribe to our newsletter for the latest news and product updates.]"]).to.eq(data["form_start"]["newsletter"].toString())
       const response = getFormPostedNetwork["response"]["body"]
       expect(response["code"]).to.eq(200)
+      // je check que :
+      // - la request envoye contient toute la data saisie dans le for
+      // - une response avec statusCode = 200
     })
     it('otp is sent', () => {
       expect(data["form_start"]["otp"]["request_id"].length).to.be.above(10)
@@ -85,6 +89,9 @@ context('home_login-challenge', () => {
       phone_number[0] = "+33"
       data["form_start"]["phone"] = phone_number.join('')
       expect(data["form_start"]["otp"]["phone"]).to.eq(data["form_start"]["phone"])
+      // je check que :
+      // - on a bien une requestId correle a notre OTP ce qui confirme implicitement le status OK de notre request
+      // - on a bien notre numero de telephone saisie reformatte
     })
   })
 
