@@ -16,7 +16,8 @@ module.exports = defineConfig({
     "defaultCommandTimeout": 10000,
     "trashAssetsBeforeRuns": true,
     "downloadsFolder": "cypress/downloads",
-    "video": false,
+    "video": true,
+    "videoCompression": false,
     "videoUploadOnPasses": false,
     "blockHosts": [
       "*google-analytics.com",
